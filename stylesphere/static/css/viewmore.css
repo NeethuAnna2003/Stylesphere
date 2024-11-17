@@ -1,0 +1,172 @@
+/* General Body Styles */
+body {
+    font-family: 'Arial', sans-serif;
+    color: #333;
+    background-color: #f9f9f9;
+}
+/* Header Styling */
+header {
+    background-color: rgb(170, 23, 23);
+    color: black;
+    padding: 0px 0;
+    text-align: center;
+    font-family: 'Playfair Display', serif;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+    /* Logo */
+    .logo {
+        font-family: 'Playfair Display', serif;
+        font-size: 50px;
+        font-weight: 700;
+        color: black;
+        letter-spacing: 6px;
+        text-transform: uppercase;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        text-decoration: none;
+    }
+
+    /* Navigation Bar Styling */
+    .navbar {
+        display: flex;
+        flex-direction: column; /* Stack items vertically */
+        align-items: center; /* Center items horizontally */
+        padding: 10px;
+        background-color: rgba(0, 0, 0, 0.7);
+    }
+
+    /* Navigation Links */
+
+    /* Icons */
+    .icons {
+        display: flex;
+        gap: 15px;
+        margin-right: 10px; /* Moves icons slightly to the right */
+    }
+
+    .icons a {
+        font-size: 26px; /* Increase icon size */
+        color: white;
+        text-decoration: none;
+        transition: transform 0.3s ease;
+    }
+
+    .icons a:hover {
+        transform: scale(1.2); /* Slightly enlarge on hover */
+    }
+
+/* Product Container */
+.product-container {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    margin: auto;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 20px;
+}
+
+/* Product Image */
+.product-image {
+    width: 100%;
+    max-width: 350px;  /* Reduced width for a smaller image */
+    height: auto;
+    margin-right: 20px;
+}
+
+.product-image img {
+    width: 100%;
+    height: auto;
+    object-fit: cover; /* Ensures the image covers the box properly */
+    border-radius: 12px;
+}
+
+/* Product Details */
+.product-details {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+}
+
+/* Product Title */
+.product-title {
+    font-size: 2em;
+    font-weight: 600;
+    color: #000;
+    margin-bottom: 10px;
+}
+
+/* Product Price */
+.product-price {
+    font-size: 1.5em;
+    color: #b12704;
+    margin-top: 10px;
+    display: flex;
+    align-items: center;  /* Aligns the price and the text vertically */
+}
+
+/* Additional Text beside the price */
+.price-info {
+    font-size: 1em;
+    color: #555;  /* You can change the color based on your preference */
+    margin-left: 10px;  /* Adds space between price and additional text */
+    font-weight: 400;
+}
+
+
+/* Product Description */
+.product-description {
+    margin: 20px 0;
+    color: #555;
+    line-height: 1.6;
+}
+
+/* Forms */
+.form-select, .form-control {
+    border-radius: 6px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Buttons */
+.btn {
+    border-radius: 25px;
+    font-size: 1em;
+    font-weight: 500;
+}
+
+/* Wishlist Button */
+.btn-wishlist {
+    background: none;
+    color: #d33;
+    border: 1px solid #d33;
+}
+
+.btn-wishlist:hover {
+    background: #d33;
+    color: #fff;
+}
+
+/* Add to Cart Button */
+.btn-add-cart {
+    background: #000;
+    color: #fff;
+}
+
+.btn-add-cart:hover {
+    background: #982929;
+    color: #000;
+}
+
+/* Buy Now Button */
+.btn-buy-now {
+    background: #b12704;
+    color: #fff;
+}
+
+.btn-buy-now:hover {
+    background: #ff4500;
+}

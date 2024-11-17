@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Categories - Stylesphere</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/category.css' %}">
+</head>
+<body>
+
+    <!-- Header -->
+    <header style="background-color: rgb(255, 255, 255);">
+        <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
+            <div class="container">
+                <!-- Logo -->
+                <a href="{% url 'index' %}" class="navbar-brand logo" style="text-decoration: none; color: black;"><i class='bx bxs-shopping-bags' style="font-size: 25px;"></i>Stylesphere</a>
+
+                <!-- Toggler for Mobile View -->
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                {% if User %}
+                    <div class="collapse navbar-collapse" id="navbarNav">
+                        <ul class="navbar-nav mx-auto">
+                            <li class="nav-item"><a href="{% url 'index' %}" class="nav-link" style="color: black;">Home</a></li>
+                            <li class="nav-item"><a href="{% url 'categorypage' %}" class="nav-link" style="color: black;">Category</a></li>
+                            <li class="nav-item"><a href="{% url 'about' %}" class="nav-link" style="color: black;">About Us</a></li>
+                            <li class="nav-item"><a href="{% url 'logout_user' %}" class="nav-link" style="color: black;">Logout</a></li>
+                        </ul>
+                
+                        <!-- Wishlist and Cart Icons -->
+                        <div class="d-flex">
+                            <a href="#" class="nav-link" style="color: black; font-size: 1.5em;padding-right: 15px;text-decoration: none;">Welcome {{ User.first_name }}<i class="bx bxs-user"></i></a>
+                            <a href="{% url 'cart_view' %}" class="nav-link" style="color: black; font-size: 1.5em;"><i class="bx bxs-cart"></i></a>
+                        </div>
+                    </div>
+                {% else %}
+                    <div class="collapse navbar-collapse" id="navbarNav">
+                        <ul class="navbar-nav mx-auto">
+                            <li class="nav-item"><a href="{% url 'index' %}" class="nav-link" style="color: black;">Home</a></li>
+                            <li class="nav-item"><a href="{% url 'categorypage' %}" class="nav-link" style="color: black;">Category</a></li>
+                            <li class="nav-item"><a href="{% url 'about' %}" class="nav-link" style="color: black;">About Us</a></li>
+                            <li class="nav-item"><a href="{% url 'signin' %}" class="nav-link" style="color: black;">Login</a></li>
+                            <li class="nav-item"><a href="{% url 'signup' %}" class="nav-link" style="color: black;">Register</a></li>
+                        </ul>
+                
+                        <!-- Wishlist and Cart Icons -->
+                        <div class="d-flex">
+                            <a href="{% url 'cart_view' %}" class="nav-link" style="color: black; font-size: 1.5em;"><i class="bx bxs-cart"></i></a>
+                        </div>
+                    </div>
+                {% endif %}
+            </div>
+        </nav>
+    </header>
+
+    <!-- Categories Title and Description -->
+    <div class="categories-header text-center">
+        <h2 class="categories-title">Categories</h2>
+        <p class="categories-description">Explore our wide range of clothing options. From traditional to modern, find the perfect outfit for every occasion.</p>
+    </div>
+
+    <!-- Categories Section -->
+
+    <div class="category-grid">
+        <!-- Saree -->
+        {% for c in category %}
+            <div class="category-card">
+                <a href="{% url 'categoryviewpage' c.id %}"><img src="{{ c.image.url}}" alt="{{c.name}}" class="category-image"></a>
+                <h3 class="category-title">{{c.name}}</h3>
+            </div>
+        {% endfor %}
+    </div>
+
+
+    <!-- Footer -->
+    <footer class="bg-light text-center py-2 ">
+        <p>&copy; 2024 Stylesphere. All Rights Reserved.</p>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

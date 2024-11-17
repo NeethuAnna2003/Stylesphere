@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stylesphere - Home</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+</head>
+<style>
+    .hero {
+        background: url('{% static 'images/BW.jpg' %}') no-repeat center center/cover;
+        height: 100vh; /* Adjust the height as needed */
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    @media (max-width: 768px) {
+        .hero {
+            height: 80vh; /* Smaller height for smaller screens */
+        }
+    }
+</style>
+<body>
+    <header style="background-color: rgb(255, 255, 255);">
+        <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
+            <div class="container">
+                <!-- Logo -->
+                <a href="{% url 'index' %}" class="navbar-brand logo" style="text-decoration: none; color: black;"><i class='bx bxs-shopping-bags' style="font-size: 25px;"></i>Stylesphere</a>
+
+                <!-- Toggler for Mobile View -->
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                {% if User %}
+                    <div class="collapse navbar-collapse" id="navbarNav">
+                        <ul class="navbar-nav mx-auto">
+                            <li class="nav-item"><a href="{% url 'index' %}" class="nav-link" style="color: black;">Home</a></li>
+                            <li class="nav-item"><a href="{% url 'categorypage' %}" class="nav-link" style="color: black;">Category</a></li>
+                            <li class="nav-item"><a href="{% url 'about' %}" class="nav-link" style="color: black;">About Us</a></li>
+                            <li class="nav-item"><a href="{% url 'logout_user' %}" class="nav-link" style="color: black;">Logout</a></li>
+                        </ul>
+                
+                        <!-- Wishlist and Cart Icons -->
+                        <div class="d-flex">
+                            <a href="{% url 'cart_view' %}" class="nav-link" style="color: black; font-size: 1.5em;"><i class="bx bxs-cart"></i></a>
+                        </div>
+                    </div>
+                {% else %}
+                    <div class="collapse navbar-collapse" id="navbarNav">
+                        <ul class="navbar-nav mx-auto">
+                            <li class="nav-item"><a href="{% url 'index' %}" class="nav-link" style="color: black;">Home</a></li>
+                            <li class="nav-item"><a href="{% url 'categorypage' %}" class="nav-link" style="color: black;">Category</a></li>
+                            <li class="nav-item"><a href="{% url 'about' %}" class="nav-link" style="color: black;">About Us</a></li>
+                            <li class="nav-item"><a href="{% url 'signin' %}" class="nav-link" style="color: black;">Login</a></li>
+                            <li class="nav-item"><a href="{% url 'signup' %}" class="nav-link" style="color: black;">Register</a></li>
+                        </ul>
+                
+                        <!-- Wishlist and Cart Icons -->
+                        <div class="d-flex">
+                            <a href="/wishlist" class="nav-link" style="color: black; font-size: 1.5em;padding-right: 15px;"><i class="bx bxs-heart"></i></a>
+                            <a href="{% url 'cart_view' %}" class="nav-link" style="color: black; font-size: 1.5em;"><i class="bx bxs-cart"></i></a>
+                        </div>
+                    </div>
+                {% endif %}
+            </div>
+        </nav>
+    </header>
+
+    <main class="content">
+        <!-- Hero Section with Background Image -->
+        <section class="hero mt-2">
+            <h1 style="color: black; font-family: 'Playfair Display', serif;">Welcome to Stylesphere</h1>
+            <p style="color: black; font-family: 'Playfair Display', serif;">Experience the elegance of classic fashion with a modern twist.</p>
+        </section>
+        
+        <!-- Product Showcase Section -->
+        <section class="product-showcase">
+            <h2 class="font-weight-bold py-4" style="font-family: 'Playfair Display', serif;font-size: 50px;text-align: center;">Our Latest Collections</h2>
+            <div class="product-grid">
+                {% for product in products %}
+                    {% if forloop.counter <= 5 %}
+                        <div class="product-card">
+                            <img src="{{ product.image.url }}" alt="{{ product.name }}" class="product-image">
+                            <h3>{{ product.name }}</h3>
+                            <p class="product-price">₹{{ product.price }}</p>
+                            <a href="{% url 'viewmorepage' product.id %}" class="add-to-cart-button">View More</a>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-light text-center py-4">
+        <p>&copy; 2024 Stylesphere. All Rights Reserved.</p>
+    </footer>
+</body>
+</html>

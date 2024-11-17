@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Categories - Stylesphere</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}?v=1.0">
+</head>
+<body>
+
+    <!-- Header -->
+    <header class="bg-white shadow-sm">
+        <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
+            <div class="container">
+                <a href="{% url 'index' %}" class="navbar-brand logo" style="text-decoration: none; color: black; font-size: 20px;">
+                    <i class='bx bxs-shopping-bags' style="font-size: 25px;"></i> Stylesphere
+                </a>
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav mx-auto">
+                        <li class="nav-item"><a href="{% url 'index' %}" class="nav-link" style="color: black;">Home</a></li>
+                        <li class="nav-item"><a href="#" class="nav-link" style="color: black;">Category</a></li>
+                        <li class="nav-item"><a href="{% url 'about' %}" class="nav-link" style="color: black;">About Us</a></li>
+                        <li class="nav-item"><a href="#" class="nav-link" style="color: black;">Login</a></li>
+                    </ul>
+                    <div class="d-flex">
+                        <a href="{% url 'cart_view' %}" class="nav-link" style="color: black; font-size: 1.5em;"><i class="bx bxs-cart"></i></a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Categories Title and Description -->
+    <div class="categories-header text-center">
+        <h2 class="categories-title py-4 font-weight-bold" style="font-family: 'Playfair Display', serif;font-size: 50px;">{{category.name}}</h2>
+        <p class="categories-description">Explore our wide range of {{category.name}} options. From traditional to modern, find the perfect outfit for every occasion.</p>
+    </div>
+
+    <!-- Categories Section -->
+    <section class="product-showcase">
+        <div class="product-grid">
+            {% for c in cloths %}
+                <div class="product-card">
+                    <img src="{{ c.image.url }}" alt="{{ c.name }}" class="product-image" style="width: 100%; max-width: 600px; height: 400;">
+                    <h3>{{ c.name }}</h3>
+                    <p class="product-price">₹{{ c.price }}</p>
+                    <a href="{% url 'viewmorepage' c.id %}"style="background-color: black; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; display: inline-block; text-align: center; font-size: 16px; transition: background-color 0.3s ease;">
+                        View More
+                      </a>
+                      
+                </div>      
+            {% endfor %}
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-light text-center py-4">
+        <p>&copy; 2024 Stylesphere. All Rights Reserved.</p>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

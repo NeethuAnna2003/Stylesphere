@@ -1,0 +1,124 @@
+/* General Styling */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f5f0;  /* Warm off-white background */
+    min-height: 100vh; /* Ensure body takes up full height */
+    padding-bottom: 60px; /* Add space for footer */
+}
+
+/* Header Styling */
+header {
+    background-color: rgb(170, 23, 23);  /* Red header */
+    color: black;
+    padding: 0px 0;
+    text-align: center;
+    font-family: 'Playfair Display', serif;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Logo */
+.logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 25px;
+    font-weight: 700;
+    color: black;
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    text-decoration: none;
+}
+
+/* Categories Header Styling */
+.categories-header {
+    margin-top: 50px;
+}
+
+.categories-title {
+    font-size: 3rem;  /* Increased font size for better visibility */
+    font-weight: bold;
+    color: #333;
+}
+
+.categories-description {
+    font-size: 1.5rem;  /* Larger description text */
+    color: #666;
+    margin-top: 10px;
+}
+
+/* Categories Section Styling */
+.category-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px; /* Increased gap between category cards */
+    padding: 30px;
+    justify-content: center;
+    margin-top: 40px;
+}
+
+/* Category Cards Styling */
+.category-card {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    padding: 40px;  /* Increased padding inside cards */
+    width: 320px; /* Increased card width */
+    max-width: 370px; /* Increased max-width for a larger card */
+    transition: transform 0.3s ease; /* Smooth scaling on hover */
+}
+
+/* Category Images Styling */
+.category-image {
+    width: 100%; /* Image takes full width of the card */
+    height: 240px; /* Increased height for the images */
+    object-fit: cover; /* Ensure the image covers the container */
+    border-radius: 8px;
+}
+
+/* Category Titles Styling */
+.category-title {
+    font-size: 2rem;  /* Increased font size for better visibility */
+    font-weight: bold;
+    margin-top: 15px;  /* Increased margin for spacing */
+}
+
+/* Hover effect for category cards */
+.category-card:hover {
+    transform: scale(1.1); /* Slightly enlarge the card on hover */
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .category-grid {
+        flex-direction: column; /* Stacks the images in a single column on small screens */
+    }
+
+    .category-card {
+        width: 100%; /* Full width on smaller screens */
+        padding: 20px;
+    }
+}
+
+/* Footer Styling */
+footer {
+    background-color: #f8f5f0;  /* Matching the warm off-white background */
+    text-align: center;
+    padding: 20px 0;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+}
+
+footer p {
+    font-size: 1.2rem;  /* Slightly bigger font for footer */
+    color: #555;
+}

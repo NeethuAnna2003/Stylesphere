@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Registration</title>
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'css/login.css' %}">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+</head>
+<body>
+  <header style="background-color: rgb(255, 255, 255);">
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
+        <div class="container">
+            <!-- Logo -->
+            <a href="{% url 'index' %}" class="navbar-brand logo" style="text-decoration: none; color: black;"><i class='bx bxs-shopping-bags' style="font-size: 25px;"></i>Stylesphere</a>
+
+            <!-- Toggler for Mobile View -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item"><a href="{% url 'index' %}" class="nav-link" style="color: black;">Home</a></li>
+                    <li class="nav-item"><a href="{% url 'categorypage' %}" class="nav-link" style="color: black;">Category</a></li>
+                    <li class="nav-item"><a href="{% url 'about' %}" class="nav-link" style="color: black;">About Us</a></li>
+                    <li class="nav-item"><a href="{% url 'signin' %}" class="nav-link" style="color: black;">Login</a></li>
+                    <li class="nav-item"><a href="{% url 'signup' %}" class="nav-link" style="color: black;">Register</a></li>
+                </ul>
+        
+                <!-- Wishlist and Cart Icons -->
+                <div class="d-flex">
+                  <a href="{% url 'cart_view' %}" class="nav-link" style="color: black; font-size: 1.5em;"><i class="bx bxs-cart"></i></a>
+              </div>
+            </div>
+        </div>
+    </nav>
+  </header>
+  <section class="body">
+    <div class="wrapper">
+      <div class="title"><span>Registration</span></div>
+      <form method="POST" action="{% url 'signup' %}">
+        {% csrf_token %}
+        <div class="row">
+          <input type="text" name="firstname" placeholder="First Name" required />
+        </div>
+        <div class="row">
+          <input type="text" name="lastname" placeholder="Last Name" required />
+        </div>
+        <div class="row">
+          <input type="text" name="username" placeholder="Username" required />
+        </div>
+        <div class="row">
+          <input type="email" name="email" placeholder="Email" required />
+        </div>
+        <div class="row">
+          <input type="password" name="password" placeholder="Password" required />
+        </div>
+        <div class="row">
+          <input type="password" name="confirm_password" placeholder="Repeat Password" required />
+        </div>
+        <div class="row button">
+          <input type="submit" value="Sign Up" />
+        </div>
+        <div class="signup-link">Already have an account? <a href="{% url 'signin' %}">login here</a></div>
+      </form>
+    </div>
+  </section>
+  
+</body>
+</html>

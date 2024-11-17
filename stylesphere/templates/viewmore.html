@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View More - Product Details</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/viewmore.css' %}">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+</head>
+<style>
+    header {
+        background-color: rgb(170, 23, 23);
+        color: black;
+        padding: 0px 0;
+        text-align: center;
+        font-family: 'Playfair Display', serif;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+        /* Logo */
+    .logo {
+        font-family: 'Playfair Display', serif;
+        font-size: 25px;
+        font-weight: 700;
+        color: black;
+        letter-spacing: 6px;
+        text-transform: uppercase;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        text-decoration: none;
+    }
+
+    /* Navigation Bar Styling */
+    .navbar {
+        display: flex;
+        flex-direction: column; /* Stack items vertically */
+        align-items: center; /* Center items horizontally */
+        padding: 10px;
+        background-color: rgba(0, 0, 0, 0.7);
+    }
+
+    /* Navigation Links */
+
+    /* Icons */
+    .icons {
+        display: flex;
+        gap: 15px;
+        margin-right: 10px; /* Moves icons slightly to the right */
+    }
+
+    .icons a {
+        font-size: 26px; /* Increase icon size */
+        color: white;
+        text-decoration: none;
+        transition: transform 0.3s ease;
+    }
+
+    .icons a:hover {
+        transform: scale(1.2); /* Slightly enlarge on hover */
+    }
+</style>
+<body>
+    <header style="background-color: rgb(255, 255, 255);">
+        <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
+            <div class="container">
+                <!-- Logo -->
+                <a href="{% url 'index' %}" class="navbar-brand logo" style="text-decoration: none; color: black;"><i class='bx bxs-shopping-bags' style="font-size: 25px;"></i>Stylesphere</a>
+
+                <!-- Toggler for Mobile View -->
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                {% if User %}
+                    <div class="collapse navbar-collapse" id="navbarNav">
+                        <ul class="navbar-nav mx-auto">
+                            <li class="nav-item"><a href="{% url 'index' %}" class="nav-link" style="color: black;">Home</a></li>
+                            <li class="nav-item"><a href="{% url 'categorypage' %}" class="nav-link" style="color: black;">Category</a></li>
+                            <li class="nav-item"><a href="{% url 'about' %}" class="nav-link" style="color: black;">About Us</a></li>
+                            <li class="nav-item"><a href="{% url 'logout_user' %}" class="nav-link" style="color: black;">Logout</a></li>
+                        </ul>
+                
+                        <!-- Wishlist and Cart Icons -->
+                        <div class="d-flex">
+                            <a href="#" class="nav-link" style="color: black; font-size: 1.5em;padding-right: 15px;text-decoration: none;">Welcome {{ User.first_name }}<i class="bx bxs-user"></i></a>
+                            <a href="{% url 'cart_view' %}" class="nav-link" style="color: black; font-size: 1.5em;"><i class="bx bxs-cart"></i></a>
+                        </div>
+                    </div>
+                {% else %}
+                    <div class="collapse navbar-collapse" id="navbarNav">
+                        <ul class="navbar-nav mx-auto">
+                            <li class="nav-item"><a href="{% url 'index' %}" class="nav-link" style="color: black;">Home</a></li>
+                            <li class="nav-item"><a href="{% url 'categorypage' %}" class="nav-link" style="color: black;">Category</a></li>
+                            <li class="nav-item"><a href="{% url 'about' %}" class="nav-link" style="color: black;">About Us</a></li>
+                            <li class="nav-item"><a href="{% url 'signin' %}" class="nav-link" style="color: black;">Login</a></li>
+                            <li class="nav-item"><a href="{% url 'signup' %}" class="nav-link" style="color: black;">Register</a></li>
+                        </ul>
+                
+                        <!-- Wishlist and Cart Icons -->
+                        <div class="d-flex">
+                            <a href="{% url 'cart_view' %}" class="nav-link" style="color: black; font-size: 1.5em;"><i class="bx bxs-cart"></i></a>
+                        </div>
+                    </div>
+                {% endif %}
+            </div>
+        </nav>
+    </header>
+
+    <main class="container py-5">
+        <div class="row product-container">
+            <!-- Product Image -->
+            <div class="col-md-6 product-image">
+                <img src="{{ cloths.image.url }}" alt="{{ cloths.name }}" class="img-fluid">
+            </div>
+            
+            <!-- Product Details -->
+            <div class="col-md-6 product-details">
+                <h1 class="product-title">{{ cloths.name }}</h1>
+                <p class="product-price">₹{{ cloths.price }}</p>
+                <p class="product-description">{{ cloths.description }}</p>
+
+                <!-- Quantity Selection -->
+                <form method="post" action="{% url 'add_to_cart' cloths.id %}">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label for="quantity-input" class="form-label fw-bold">Quantity</label>
+                        <input type="number" id="quantity-input" name="quantity" class="form-control w-50" min="1" value="1">
+                    </div>
+                    <button type="submit" class="btn btn-danger text-dark me-2">
+                        <i class="bx bxs-cart"></i> Add to Cart
+                    </button>
+                    <a href="{% url 'index' %}" class="btn btn-secondary">
+                        <i class="bx bx-arrow-back"></i> Back to Home
+                    </a>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-light text-center py-4">
+        <p class="mb-0">&copy; 2024 Stylesphere. Designed with style and precision.</p>
+    </footer>
+</body>
+</html>

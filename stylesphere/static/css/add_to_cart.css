@@ -1,0 +1,115 @@
+/* General Table Styling */
+
+/* Header Styling */
+header {
+    background-color: rgb(170, 23, 23);
+    color: black;
+    padding: 0px 0;
+    text-align: center;
+    font-family: 'Playfair Display', serif;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Logo */
+  .logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 25px;
+    font-weight: 700;
+    color: black;
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    text-decoration: none;
+  }
+  
+  /* Navigation Bar Styling */
+  .navbar {
+    display: flex;
+    flex-direction: column; /* Stack items vertically */
+    align-items: center; /* Center items horizontally */
+    padding: 10px;
+    background-color: rgba(0, 0, 0, 0.7);
+  }
+  
+  /* Navigation Links */
+  
+  /* Icons */
+  .icons {
+    display: flex;
+    gap: 15px;
+    margin-right: 10px; /* Moves icons slightly to the right */
+  }
+  
+  .icons a {
+    font-size: 26px; /* Increase icon size */
+    color: white;
+    text-decoration: none;
+    transition: transform 0.3s ease;
+  }
+  
+  .icons a:hover {
+    transform: scale(1.2); /* Slightly enlarge on hover */
+  }
+
+.table {
+    margin-top: 20px;
+    font-size: 1rem;
+}
+
+.table th, .table td {
+    vertical-align: middle;
+    text-align: center;
+}
+
+/* Thumbnail Styling */
+.img-thumbnail {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Button Customizations */
+.btn-sm {
+    font-size: 0.875rem;
+    padding: 0.5rem 1rem;
+}
+
+.btn-danger {
+    background-color: #dc3545;
+    border-color: #dc3545;
+}
+
+.btn-danger:hover {
+    background-color: #c82333;
+    border-color: #bd2130;
+}
+
+.btn-success {
+    background-color: #28a745;
+    border-color: #28a745;
+}
+
+.btn-success:hover {
+    background-color: #218838;
+    border-color: #1e7e34;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .table th, .table td {
+        font-size: 0.875rem;
+    }
+
+    .btn-lg {
+        font-size: 1rem;
+        padding: 0.75rem 1.25rem;
+    }
+    .navbar {
+        flex-direction: column;
+    }
+  
+    .nav-links {
+        flex-direction: column;
+    }
+}
