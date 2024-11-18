@@ -8,6 +8,81 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'css/about.css' %}">
+    <style>
+        /* General animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 1s forwards;
+        }
+
+        .fade-in-left {
+            opacity: 0;
+            transform: translateX(-20px);
+            animation: fadeInLeft 1s forwards;
+        }
+
+        .fade-in-right {
+            opacity: 0;
+            transform: translateX(20px);
+            animation: fadeInRight 1s forwards;
+        }
+
+        /* Keyframes */
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInLeft {
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes fadeInRight {
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        /* Section spacing */
+        section.container {
+            padding: 60px 15px;
+        }
+
+        /* Values icons hover effect */
+        .values-icon {
+            transition: transform 0.3s;
+        }
+
+        .values-icon:hover {
+            transform: scale(1.2);
+        }
+
+        /* Rounded images with shadow */
+        img.rounded {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+
+        img.rounded:hover {
+            transform: scale(1.05);
+        }
+
+        /* Heading hover effect */
+        h1, h2 {
+            transition: color 0.3s;
+        }
+
+        h1:hover, h2:hover {
+            color: #555;
+        }
+    </style>
 </head>
 <body>
 
@@ -15,96 +90,75 @@
     <header style="background-color: rgb(255, 255, 255);">
         <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
             <div class="container">
-                <!-- Logo -->
                 <a href="{% url 'index' %}" class="navbar-brand logo" style="text-decoration: none; color: black;"><i class='bx bxs-shopping-bags' style="font-size: 25px;"></i>Stylesphere</a>
-
-                <!-- Toggler for Mobile View -->
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-
-                {% if User %}
-                    <div class="collapse navbar-collapse" id="navbarNav">
-                        <ul class="navbar-nav mx-auto">
-                            <li class="nav-item"><a href="{% url 'index' %}" class="nav-link" style="color: black;">Home</a></li>
-                            <li class="nav-item"><a href="{% url 'categorypage' %}" class="nav-link" style="color: black;">Category</a></li>
-                            <li class="nav-item"><a href="{% url 'about' %}" class="nav-link" style="color: black;">About Us</a></li>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav mx-auto">
+                        <li class="nav-item"><a href="{% url 'index' %}" class="nav-link" style="color: black;">Home</a></li>
+                        <li class="nav-item"><a href="{% url 'categorypage' %}" class="nav-link" style="color: black;">Category</a></li>
+                        <li class="nav-item"><a href="{% url 'about' %}" class="nav-link" style="color: black;">About Us</a></li>
+                        {% if User %}
                             <li class="nav-item"><a href="{% url 'logout_user' %}" class="nav-link" style="color: black;">Logout</a></li>
-                        </ul>
-                
-                        <!-- Wishlist and Cart Icons -->
-                        <div class="d-flex">
-                            <a href="#" class="nav-link" style="color: black; font-size: 1.5em;padding-right: 15px;text-decoration: none;">Welcome {{ User.first_name }}<i class="bx bxs-user"></i></a>
-                            <a href="{% url 'cart_view' %}" class="nav-link" style="color: black; font-size: 1.5em;"><i class="bx bxs-cart"></i></a>
-                        </div>
-                    </div>
-                {% else %}
-                    <div class="collapse navbar-collapse" id="navbarNav">
-                        <ul class="navbar-nav mx-auto">
-                            <li class="nav-item"><a href="{% url 'index' %}" class="nav-link" style="color: black;">Home</a></li>
-                            <li class="nav-item"><a href="{% url 'categorypage' %}" class="nav-link" style="color: black;">Category</a></li>
-                            <li class="nav-item"><a href="{% url 'about' %}" class="nav-link" style="color: black;">About Us</a></li>
+                        {% else %}
                             <li class="nav-item"><a href="{% url 'signin' %}" class="nav-link" style="color: black;">Login</a></li>
                             <li class="nav-item"><a href="{% url 'signup' %}" class="nav-link" style="color: black;">Register</a></li>
-                        </ul>
-                
-                        <!-- Wishlist and Cart Icons -->
-                        <div class="d-flex">
-                            <a href="{% url 'cart_view' %}" class="nav-link" style="color: black; font-size: 1.5em;"><i class="bx bxs-cart"></i></a>
-                        </div>
+                        {% endif %}
+                    </ul>
+                    <div class="d-flex">
+                        <a href="{% url 'cart_view' %}" class="nav-link" style="color: black; font-size: 1.5em;"><i class="bx bxs-cart"></i></a>
                     </div>
-                {% endif %}
+                </div>
             </div>
         </nav>
     </header>
 
     <!-- About Us Section -->
     <section class="container py-5">
-        <div class="text-center mb-5">
+        <div class="text-center mb-5 fade-in">
             <h1>About Stylesphere</h1>
             <p class="text-muted">Where elegance meets contemporary fashion.</p>
         </div>
 
         <!-- About Content -->
         <div class="row align-items-center">
-            <div class="col-md-6">
+            <div class="col-md-6 fade-in-left">
                 <img src="{% static 'images/about1.jpg' %}" alt="Stylesphere Collection" class="img-fluid rounded">
             </div>
-            <div class="col-md-6">
+            <div class="col-md-6 fade-in-right">
                 <h2>Our Story</h2>
-                <p style="text-align: justify;">Stylesphere was born from a passion for exquisite design and timeless fashion. We believe in creating clothing that not only defines current trends but also embodies sophistication and elegance.</p>
-                <p  style="text-align: justify;">Each piece in our collection is carefully curated to ensure the highest quality and unique style that reflects the individuality of our clientele. From luxurious traditional wear to chic modern outfits, Stylesphere is dedicated to bringing you the finest in fashion.</p>
+                <p>Stylesphere was born from a passion for exquisite design and timeless fashion. We believe in creating clothing that defines current trends and embodies sophistication.</p>
             </div>
         </div>
 
         <!-- Mission Section -->
         <div class="row align-items-center mt-5">
-            <div class="col-md-6 order-md-2">
+            <div class="col-md-6 order-md-2 fade-in-right">
                 <img src="{% static 'images/about2.jpg' %}" alt="Mission" class="img-fluid rounded">
             </div>
-            <div class="col-md-6 order-md-1">
+            <div class="col-md-6 order-md-1 fade-in-left">
                 <h2>Our Mission</h2>
-                <p  style="text-align: justify;">At Stylesphere, our mission is to empower individuals through fashion. We strive to deliver a collection that is not only stylish but also sustainable, inclusive, and ethically crafted. Our designs aim to inspire confidence and make every customer feel extraordinary.</p>
-                <p  style="text-align: justify;">We are committed to a future where fashion is conscious, creative, and meaningful. Join us on this journey to make style an expression of who you are.</p>
+                <p>At Stylesphere, our mission is to empower individuals through fashion. We strive to deliver a collection that is stylish, sustainable, and ethically crafted.</p>
             </div>
         </div>
 
         <!-- Values Section -->
-        <div class="text-center mt-5">
+        <div class="text-center mt-5 fade-in">
             <h2>Our Values</h2>
             <div class="row mt-3">
                 <div class="col-md-4">
-                    <i class="bx bxs-heart text-danger" style="font-size: 3rem;"></i>
+                    <i class="bx bxs-heart text-danger values-icon" style="font-size: 3rem;"></i>
                     <h4>Passion for Fashion</h4>
-                    <p>Our love for fashion drives us to bring you the latest in designer wear with an enduring charm.</p>
+                    <p>Our love for fashion drives us to bring you the latest in designer wear with enduring charm.</p>
                 </div>
                 <div class="col-md-4">
-                    <i class="bx bxs-leaf text-success" style="font-size: 3rem;"></i>
+                    <i class="bx bxs-leaf text-success values-icon" style="font-size: 3rem;"></i>
                     <h4>Sustainability</h4>
                     <p>We are committed to responsible fashion, ensuring that our choices positively impact the world.</p>
                 </div>
                 <div class="col-md-4">
-                    <i class="bx bxs-group text-primary" style="font-size: 3rem;"></i>
+                    <i class="bx bxs-group text-primary values-icon" style="font-size: 3rem;"></i>
                     <h4>Inclusivity</h4>
                     <p>Stylesphere is a space for all, embracing diversity in style, body, and spirit.</p>
                 </div>
@@ -112,12 +166,14 @@
         </div>
     </section>
 
+    
+
     <!-- Footer -->
     <footer class="bg-light text-center py-4">
         <p>&copy; 2024 Stylesphere. All Rights Reserved.</p>
     </footer>
 
-    <!-- Bootstrap JS and Popper.js -->
+    <!-- Bootstrap JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

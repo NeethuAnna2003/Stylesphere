@@ -48,6 +48,7 @@
                 
                         <!-- Wishlist and Cart Icons -->
                         <div class="d-flex">
+                            <a href="{% url 'user_account' %}" class="nav-link" style="color: black; font-size: 1.5em;padding-right: 15px;text-decoration: none;">Welcome {{ User.first_name }}<i class="bx bxs-user"></i></a>
                             <a href="{% url 'cart_view' %}" class="nav-link" style="color: black; font-size: 1.5em;"><i class="bx bxs-cart"></i></a>
                         </div>
                     </div>
@@ -61,9 +62,8 @@
                             <li class="nav-item"><a href="{% url 'signup' %}" class="nav-link" style="color: black;">Register</a></li>
                         </ul>
                 
-                        <!-- Wishlist and Cart Icons -->
+                        <!-- Cart Icons -->
                         <div class="d-flex">
-                            <a href="/wishlist" class="nav-link" style="color: black; font-size: 1.5em;padding-right: 15px;"><i class="bx bxs-heart"></i></a>
                             <a href="{% url 'cart_view' %}" class="nav-link" style="color: black; font-size: 1.5em;"><i class="bx bxs-cart"></i></a>
                         </div>
                     </div>

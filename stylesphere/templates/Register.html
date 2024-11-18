@@ -10,6 +10,18 @@
   <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
 </head>
+<style>
+  .body {
+    font-family: 'Arial', sans-serif;
+    background: #f2f2f2;
+    margin-top: 25px;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+</style>
 <body>
   <header style="background-color: rgb(255, 255, 255);">
     <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
@@ -42,7 +54,7 @@
   <section class="body">
     <div class="wrapper">
       <div class="title"><span>Registration</span></div>
-      <form method="POST" action="{% url 'signup' %}">
+      <form method="POST" action="{% url 'signup' %}" enctype="multipart/form-data">
         {% csrf_token %}
         <div class="row">
           <input type="text" name="firstname" placeholder="First Name" required />
@@ -57,18 +69,63 @@
           <input type="email" name="email" placeholder="Email" required />
         </div>
         <div class="row">
-          <input type="password" name="password" placeholder="Password" required />
+          <input type="text" id="address" name="address" placeholder="Enter your Address" required>
         </div>
         <div class="row">
-          <input type="password" name="confirm_password" placeholder="Repeat Password" required />
+            <input type="text" class="input-field" name="contact" id="contact" placeholder="Contact Number"required>
+        </div>
+        <div class="row">
+            <label for="profile">Upload Profile Picture:</label>
+            <input type="file" id="profile" name="profile" class="input-field" accept="image/*">
+        </div>
+        <div class="row">
+          <input type="password" id="password" name="password" placeholder="Password" required />
+        </div>
+        <div class="row">
+          <input type="password" id="confirm_password" name="confirm_password" placeholder="Repeat Password" required />
         </div>
         <div class="row button">
           <input type="submit" value="Sign Up" />
         </div>
+          <div class="form-group" id="password-criteria" style="margin-top: 5px; color: black; font-size: 14px;">
+            <p>*Password must include:</p>
+            <ul style="padding-left: 30px;">
+                <li id="length" style="color: red;">At least 8 characters</li>
+                <li id="uppercase" style="color: red;">At least one uppercase letter</li>
+                <li id="lowercase" style="color: red;">At least one lowercase letter</li>
+                <li id="number" style="color: red;">At least one number</li>
+                <li id="special" style="color: red;">At least one special character (@$!%*?&)</li>
+            </ul>
+          </div>
         <div class="signup-link">Already have an account? <a href="{% url 'signin' %}">login here</a></div>
       </form>
     </div>
   </section>
-  
+  <script>
+    document.getElementById("password").addEventListener("input", function () {
+        var password = this.value;
+
+        // Criteria elements
+        var length = document.getElementById("length");
+        var uppercase = document.getElementById("uppercase");
+        var lowercase = document.getElementById("lowercase");
+        var number = document.getElementById("number");
+        var special = document.getElementById("special");
+
+        // Regex patterns
+        var lengthCheck = password.length >= 8;
+        var uppercaseCheck = /[A-Z]/.test(password);
+        var lowercaseCheck = /[a-z]/.test(password);
+        var numberCheck = /\d/.test(password);
+        var specialCheck = /[@$!%*?&#]/.test(password);
+
+        // Update criteria styles
+        length.style.color = lengthCheck ? "green" : "red";
+        uppercase.style.color = uppercaseCheck ? "green" : "red";
+        lowercase.style.color = lowercaseCheck ? "green" : "red";
+        number.style.color = numberCheck ? "green" : "red";
+        special.style.color = specialCheck ? "green" : "red";
+    });
+  </script>
 </body>
 </html>

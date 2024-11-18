@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Profile</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .profile-img-preview {
+            position: relative;
+            margin-bottom: 15px;
+        }
+        .profile-img-preview img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .form-label {
+            font-weight: bold;
+        }
+        .btn-custom {
+            background-color: #170f4a;
+            color: white;
+            border: none;
+        }
+        .btn-custom:hover {
+            background-color: #2c1c6b;
+        }
+    </style>
+</head>
+<body>
+    <div class="container py-5">
+        <h2 class="text-center mb-4">Edit Profile</h2>
+        <form method="POST" enctype="multipart/form-data" class="mx-auto" style="max-width: 600px;">
+            {% csrf_token %}
+            
+            <!-- Profile Image Section -->
+            <div class="mb-3 text-center">
+                <div class="profile-img-preview mb-3">
+                    <!-- Display Current Profile Image -->
+                    {% if user.image %}
+                        <img src="{{ user.image.url }}" alt="Current Profile Image">
+                    {% else %}
+                        <p>No profile image uploaded</p>
+                    {% endif %}
+                </div>
+                
+                <!-- Change Profile Image -->
+                <label for="prf_image" class="form-label">Change Profile Image</label>
+                <input type="file" id="prf_image" name="prf_image" class="form-control">
+            </div>
+
+            <!-- First Name -->
+            <div class="mb-3">
+                <label for="first_name" class="form-label">First Name</label>
+                <input type="text" name="first_name" class="form-control" value="{{ user.user.first_name }}" required>
+            </div>
+
+            <!-- Last Name -->
+            <div class="mb-3">
+                <label for="last_name" class="form-label">Last Name</label>
+                <input type="text" name="last_name" class="form-control" value="{{ user.user.last_name }}" required>
+            </div>
+
+            <!-- Email -->
+            <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" name="email" class="form-control" value="{{ user.user.email }}" required>
+            </div>
+
+            <!-- Address -->
+            <div class="mb-3">
+                <label for="address" class="form-label">Address</label>
+                <input type="text" name="address" class="form-control" value="{{ user.address }}" required>
+            </div>
+
+            <!-- Phone Number -->
+            <div class="mb-3">
+                <label for="phone" class="form-label">Phone Number</label>
+                <input type="text" name="phone" class="form-control" value="{{ user.phone }}" required>
+            </div>
+
+            <!-- Submit Button -->
+            <button type="submit" class="btn btn-custom w-100">Save Changes</button>
+        </form>
+
+        <!-- Cancel Link -->
+        <a href="{% url 'user_account' %}" class="btn btn-link mt-3 d-block text-center">Cancel</a>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
